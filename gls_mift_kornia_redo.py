@@ -697,13 +697,13 @@ def blur_and_downsample_image(
         tensor of shape :math:`(B, CH, H//scale_factor, W//scale_factor)`.
 
     Notes:
-        Pyramid reduce uses a Gaussian kernel with a standard deviation of 2 * downscale / 6.0
+        Pyramid reduce uses a Gaussian kernel with a standard deviation of 2 * scalefactor / 6.0
         https://scikit-image.org/docs/stable/api/skimage.transform.html
 
     """
     B, C, H, W = img.size()
     downscale = 1.0 / scale_factor
-    sigma = 2.0 * downscale / 6.0
+    sigma = 2.0 * scale_factor / 6.0
     ksize = int(2.0 * 4.0 * sigma + 1.0)
     ksize = ksize + 1 if ksize % 2 == 0 else ksize
     # # hack to get around padding issues
